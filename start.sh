@@ -1,26 +1,35 @@
 #!/bin/bash
-echo "Docker PGN wallet
 
-By: Jos Hendriks
-GitHub: https://github.com/joshendriks/
-Docker: https://hub.docker.com/r/joshendriks/ 
+configfile=$1
+ticker=$2
+walletdaemon=$3
 
-BTC: 1NCZgpMMoNwL6ZeFsEQ2kRZEzzzTd5TuGk
-PGN: PSR8cD2sLhQZ6qtcHccSJ69fP78po1mNai"
+datadir=/data/wallet
+configdir="/config"
+walletfile="wallet.dat"
+echo "Docker $ticker wallet
 
-config="/config/pigeon.conf"
-if [ -f "$config" ]
-then
-    echo "Using $config"
-    cp $config /data/.pigeon/pigeon.conf
-fi
+By: ChainMapper
+Website: https://chainmapper.com"
 
-wallet="/config/wallet.dat"
+mkdir -p $datadir
+
+wallet="$configdir/$walletfile"
 if [ -f "$wallet" ]
 then
     echo "Using $wallet"
-    cp $wallet /data/.pigeon/wallet.dat
+    cp $wallet $datadir/$walletfile
 fi
 
-echo "Starting PGN daemon..."
-pigeond
+config="$configdir/$configfile"
+if [ -f "$config" ]
+then
+    echo "Using $config"
+    cp $config $datadir/$configfile
+else
+    touch $datadir/$configfile
+    /gen_config.sh > $datadir/$configfile
+fi
+
+echo "Starting $ticker daemon..."
+$walletdaemon -datadir=$datadir
