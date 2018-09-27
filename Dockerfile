@@ -1,6 +1,6 @@
 FROM chainmapper/walletbase-xenial
 
-ENV WALLET_URL=https://github.com/Pigeoncoin/pigeoncoin/releases/download/v0.15.99.3/pigeoncoin-v0.15.99.3-linux64.tar.gz
+ENV WALLET_URL=http://downloads.powerpool.money/pigeoncoin-0.15.99.4-linuxbin.tgz
 
 RUN wget $WALLET_URL -O /tmp/wallet.tar.gz \
 	&& cd /usr/local/bin \
