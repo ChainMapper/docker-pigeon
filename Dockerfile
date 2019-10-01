@@ -5,7 +5,7 @@ ENV GIT_COIN_NAME   pigeoncoin
 
 RUN	git clone $GIT_COIN_URL $GIT_COIN_NAME \
 	&& cd $GIT_COIN_NAME \
-	&& git checkout tags/v16.00.2 \
+	&& git checkout tags/v0.17.0.3 \
 	&& chmod +x autogen.sh \
 	&& chmod +x share/genbuild.sh \
 	&& chmod +x src/leveldb/build_detect_platform \
